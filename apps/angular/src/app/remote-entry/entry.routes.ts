@@ -7,14 +7,9 @@ export const remoteRoutes: Route[] = [
     component: RemoteEntryComponent,
     children: [
       {
-        path: 'home',
+        path: '',
         loadComponent: () =>
           import('../home/home.component').then(m => m.HomeComponent),
-      },
-      {
-        path: '',
-        redirectTo: 'home',
-        pathMatch: 'full',
       },
     ]
   },
