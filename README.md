@@ -185,7 +185,7 @@ npx nx test angular
 npx nx run-many -t test
 ```
 
-### Add new e2e Test
+### Add New e2e Test
 ```bash
 npx nx g @nx/cypress:e2e --project=shell-e2e --directory=apps/shell-e2e --devServerTarget=shell:serve
 npx nx g @nx/cypress:e2e --project=react-e2e --directory=apps/react-e2e --devServerTarget=react:serve
