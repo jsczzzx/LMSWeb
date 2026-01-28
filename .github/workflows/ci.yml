@@ -30,14 +30,15 @@ jobs:
 
       - uses: nrwl/nx-set-shas@v4
 
-      # ===== CI checks =====
+      # ===== CI checks & Build =====
       - run: npx nx-cloud record -- nx format:check
-      - run: npx nx affected -t=lint,build
+      - run: npx nx affected -t=lint,build --configuration=production
 
       # ===== DEPLOY: Shell (main) =====
       - name: Deploy Shell to S3
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
+          cp dist/apps/shell/assets/module-federation.manifest.prod.json dist/apps/shell/assets/module-federation.manifest.json
           aws s3 sync dist/apps/shell s3://antra-lms-shell --delete
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
