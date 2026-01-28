@@ -5,10 +5,13 @@ import Dashboard from '../pages/dashboard/dashboard';
 import About from '../pages/about/about';
 
 export function App() {
+  const basename = window.location.pathname.startsWith('/react') ? '/react' : '/';
+
   return (
-    <BrowserRouter basename="/react">
+    <BrowserRouter basename={basename}>
       <div style={{ border: '2px dashed blue', padding: '10px', margin: '10px' }}>
         <h2>React Remote App</h2>
+        <p>Current Basename: {basename}</p> 
         
         <Routes>
           <Route path="/" element={<About />} />
