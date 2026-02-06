@@ -2,10 +2,7 @@ name: CI
 
 on:
   push:
-    branches:
-      - main
-      - angular
-      - react
+    branches: [main, angular, react]
   pull_request:
 
 permissions:
@@ -17,29 +14,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Setup Node
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 20
-          cache: 'npm'
+          cache: npm
 
-      - name: Install dependencies
-        run: npm ci
+      - run: npm ci
 
-      - name: Set Nx SHAs
-        uses: nrwl/nx-set-shas@v4
+      - uses: nrwl/nx-set-shas@v4
 
-      # ===== CI checks =====
       - name: Format check
         run: npx nx format:check
 
-      - name: Lint & Build (production)
+      - name: Lint & Build
         run: npx nx run-many -t lint,build --configuration=production
+
+      # --- deploy steps unchanged ---
+
 
       # ===== DEPLOY: Shell (main only) =====
       - name: Deploy Shell to S3
