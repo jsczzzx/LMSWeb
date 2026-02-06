@@ -31,7 +31,7 @@ jobs:
       - uses: nrwl/nx-set-shas@v4
 
       # ===== CI checks =====
-      - run: npx nx-cloud record -- nx format:check
+      - run: npx nx format:check      
       
       # ===== temporarily removed unit test =====
       - run: npx nx run-many -t lint,build --configuration=production
