@@ -17,23 +17,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
           node-version: 20
           cache: 'npm'
 
-      - run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-      - uses: nrwl/nx-set-shas@v4
+      - name: Set Nx SHAs
+        uses: nrwl/nx-set-shas@v4
 
       # ===== CI checks =====
-      - run: npx nx-cloud record -- nx format:check
-      
-      - run: npx nx run-many -t lint,build --configuration=production
+      - name: Format check
+        run: npx nx format:check
+
+      - name: Lint & Build (production)
+        run: npx nx run-many -t lint,build --configuration=production
 
       # ===== DEPLOY: Shell (main only) =====
       - name: Deploy Shell to S3
