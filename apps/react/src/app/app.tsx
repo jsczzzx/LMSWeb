@@ -10,7 +10,7 @@ export function App() {
   return (
     <BrowserRouter basename={basename}>
       <div style={{ border: '2px dashed blue', padding: '10px', margin: '10px' }}>
-        <h2>React Remote App</h2>
+        <h2>React Remote App (test)</h2>
         <p>Current Basename: {basename}</p> 
         
         <Routes>
