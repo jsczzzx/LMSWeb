@@ -16,9 +16,6 @@ jobs:
   main:
     runs-on: ubuntu-latest
 
-    env:
-      NX_CLOUD: false   
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -56,7 +53,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
 
-      # ===== DEPLOY: Angular Remote =====
+      # ===== DEPLOY: Angular Remote (main OR angular) =====
       - name: Deploy Angular Remote to S3
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/angular'
         run: |
@@ -69,7 +66,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
 
-      # ===== DEPLOY: React Remote =====
+      # ===== DEPLOY: React Remote (main OR react) =====
       - name: Deploy React Remote to S3
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/react'
         run: |
