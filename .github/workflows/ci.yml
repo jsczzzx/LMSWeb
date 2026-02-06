@@ -16,6 +16,9 @@ jobs:
   main:
     runs-on: ubuntu-latest
 
+    env:
+      NX_NO_CLOUD: 'true'
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -32,7 +35,7 @@ jobs:
 
       # ===== CI checks =====
       - run: npx nx format:check      
-      
+
       # ===== temporarily removed unit test =====
       - run: npx nx run-many -t lint,build --configuration=production
 
